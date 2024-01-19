@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "trendz-app",
+    "slug": "trendz-app",
+    "experiments": {
+      "tsconfigPaths": false
+    }
+  }
+}
