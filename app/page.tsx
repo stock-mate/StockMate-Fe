@@ -1,5 +1,5 @@
 // import Logo from "@/app/ui/Logo";
-import Header from "@/app/ui/Header";
+import Header from "@/app/ui/header";
 
 export default function Home() {
   return (

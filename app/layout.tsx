@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { archivo } from "@/app/ui/font";
 import "@/app/ui/globals.css";
 
 export const metadata: Metadata = {
@@ -14,9 +13,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${archivo.className} flex min-h-screen flex-col items-center p-24`}>
+      <body className="flex min-h-screen flex-col items-center p-24">
         {/* <body className={`flex min-h-screen flex-col items-center p-24`}> */}
-
         {children}
       </body>
     </html>

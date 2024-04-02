@@ -1,4 +1,4 @@
-import Logo from "@/app/ui/Logo";
+import Logo from "@/app/ui/logo";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
