@@ -14,6 +14,7 @@ const config: Config = {
       },
       fontFamily: {
         Pretendard: ["Pretendard"],
+        archivo: ["--font-archivo"],
       },
     },
   },
