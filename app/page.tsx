@@ -4,7 +4,6 @@ import Footer from "@/app/ui/footer";
 
 export default function Home() {
   const liHTML = new Array(10).fill(0).map((_, idx) => <RankingItem idx={idx} />);
-
   return (
     <>
       <Header />
