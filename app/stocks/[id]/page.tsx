@@ -1,4 +1,5 @@
 import Header from "@/app/ui/header";
+import Footer from "@/app/ui/footer";
 import { getStock } from "@/app/lib/stocks";
 
 const page = async ({ params }: { params: { id: string } }) => {
@@ -19,6 +20,7 @@ const page = async ({ params }: { params: { id: string } }) => {
 
         <div>{/* chart! */}</div>
       </main>
+      <Footer />
     </>
   );
 };
