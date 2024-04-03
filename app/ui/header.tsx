@@ -3,7 +3,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
   return (
-    <header className="max-w-5xl w-full flex flex-row justify-between">
+    <header className="max-w-5xl w-full flex flex-row justify-between mt-4">
       <div className="basis-1/4">
         <Logo />
       </div>

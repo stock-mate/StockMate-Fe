@@ -13,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex min-h-screen flex-col items-center pt-10 font-Pretendard">
-        {children}
-      </body>
+      <body className="flex min-h-screen flex-col items-center font-Pretendard">{children}</body>
     </html>
   );
 }

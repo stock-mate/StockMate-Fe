@@ -4,7 +4,7 @@ import Link from "next/link";
 const RankingItem = ({ idx }: any) => {
   return (
     <li>
-      <Link href="/" className="flex justify-between h-10 mt-5">
+      <Link href="/stocks/SSNLF" className="flex justify-between h-10 mt-5">
         <div className="flex item-center items-center gap-4">
           <span className="w-4">{idx + 1}</span>
           <Image src="/samsung.png" width={40} height={40} alt="samsung" className="rounded-full" />
