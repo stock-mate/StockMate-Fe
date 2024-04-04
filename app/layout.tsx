@@ -1,3 +1,4 @@
+import { ContextProvider } from "./context";
 import type { Metadata } from "next";
 import "@/app/ui/globals.css";
 
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex min-h-screen flex-col items-center font-Pretendard">{children}</body>
+      <body className="flex min-h-screen flex-col items-center font-Pretendard">
+        <ContextProvider>{children}</ContextProvider>
+      </body>
     </html>
   );
 }
