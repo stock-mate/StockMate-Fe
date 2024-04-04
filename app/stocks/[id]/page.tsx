@@ -2,13 +2,21 @@ import Header from "@/app/ui/header";
 import Footer from "@/app/ui/footer";
 import { getStock } from "@/app/lib/stocks";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { query: string };
+}) => {
   const { id } = params;
   const { longName } = await getStock(id);
+  const { query } = searchParams || "";
+
   return (
     <>
-      <Header />
-      <main className="max-w-5xl w-full h-screen mt-10 border">
+      <Header query={query} />
+      <main className="max-w-5xl w-full h-screen mt-10">
         <div className="flex items-center gap-3 border p-4">
           <h1 className="text-3xl font-semibold">{longName}</h1>
           <div className="flex gap-4 items-center">
@@ -17,7 +25,6 @@ const page = async ({ params }: { params: { id: string } }) => {
             <span className="font-light text-red-500">↑800</span>
           </div>
         </div>
-
         <div>{/* chart! */}</div>
       </main>
       <Footer />

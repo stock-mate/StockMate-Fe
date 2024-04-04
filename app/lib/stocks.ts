@@ -12,18 +12,15 @@ const fetchData = async (url: string) => {
 };
 
 export const getStock = async (ticker: string) => {
-  console.log("call get stock");
   const url = `${process.env.API_URL}/stocks/${ticker}`;
   const data = await fetchData(url);
-  // console.log(data);
   return data;
 };
 
-export const getSuggestions = async (keyword: string) => {
-  console.log(process.env.API_URL);
-  console.log("call get suggestions");
-  const url = `${process.env.API_URL}/find_ticker/?comname=${keyword}`;
+export const getSuggestions = async (query: string) => {
+  if (!query) return []; // 왜 자꾸 호출되는거지?
+  const url = `${process.env.API_URL}/find_ticker/?comname=${query}`;
   const data = await fetchData(url);
-  // console.log(data);
-  return data;
+  const hasNoSuggestions = data === "Ticker not found for the given company name.";
+  return hasNoSuggestions ? [] : data;
 };
