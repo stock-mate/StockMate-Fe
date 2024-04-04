@@ -1,4 +1,4 @@
-import { ContextProvider } from "./context";
+import { ContextProvider } from "./global-context";
 import type { Metadata } from "next";
 import "@/app/ui/globals.css";
 

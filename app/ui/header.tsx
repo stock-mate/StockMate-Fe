@@ -1,7 +1,7 @@
 import Logo from "@/app/ui/logo";
 import Search from "@/app/ui/search";
 import { getSuggestions } from "../lib/stocks";
-import SuggestionList from "@/app/ui/sugesstion-list";
+import SuggestionList from "@/app/ui/suggestion-list";
 
 const Header = async ({ query }: { query: string }) => {
   const suggestions = (await getSuggestions(query)) || [];

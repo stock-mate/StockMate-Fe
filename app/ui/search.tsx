@@ -1,17 +1,15 @@
 "use client";
-
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useContext } from "react";
-import Context from "../context";
+import GlobalContext from "@/app/global-context";
 
 const Search = () => {
   const { replace } = useRouter();
   const searchParam = useSearchParams();
   const pathname = usePathname();
-  const { test } = useContext(Context);
-  console.log("!!!!!!!!!!!", test);
+  const { setIsSearchFocus } = useContext(GlobalContext);
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParam);
@@ -30,6 +28,8 @@ const Search = () => {
         placeholder="영문 종목명을 입력하세요"
         className="w-full p-2 outline-none"
         onChange={(e) => handleSearch(e.target.value)}
+        onFocus={() => setIsSearchFocus(true)}
+        onBlur={() => setIsSearchFocus(false)}
       />
       <button type="submit">
         <MagnifyingGlassIcon className="text-slate-500 w-6 h-6 stroke-2 mr-2" />
