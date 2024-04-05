@@ -10,7 +10,7 @@ const SearchWrapper = ({ suggestions }: { suggestions: { TICKER: string; COMNAME
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleOutsideClose = (e: any) => {
+    const handleOutsideClose = (e: { target: any }) => {
       if (isSearchFocus && ref.current && !ref.current.contains(e.target)) {
         setIsSearchFocus(false);
       }
@@ -21,8 +21,8 @@ const SearchWrapper = ({ suggestions }: { suggestions: { TICKER: string; COMNAME
   }, [isSearchFocus]);
 
   return (
-    <div ref={ref} onClick={() => setIsSearchFocus((prev) => !prev)}>
-      <Search />
+    <div ref={ref} onClick={() => setIsSearchFocus((isFocus) => (isFocus ? isFocus : !isFocus))}>
+      <Search suggestions={suggestions} />
       <SuggestionList suggestions={suggestions} />
     </div>
   );

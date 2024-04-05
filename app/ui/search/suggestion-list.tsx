@@ -9,11 +9,13 @@ const SuggestionList = ({
 }: {
   suggestions: { TICKER: string; COMNAME: string }[];
 }) => {
-  const { isSearchFocus } = useContext(GlobalContext);
-
-  const suggestionsHTML = suggestions?.map(({ TICKER, COMNAME }) => (
+  const { isSearchFocus, focusIndex } = useContext(GlobalContext);
+  const suggestionsHTML = suggestions?.map(({ TICKER, COMNAME }, index) => (
     <li key={`${TICKER}_${COMNAME}`}>
-      <Link href={`/stocks/${TICKER}`} className="block p-2 border hover:bg-slate-100">
+      <Link
+        href={`/stocks/${TICKER}`}
+        className={`block p-2 border hover:bg-slate-100 ${focusIndex === index && "bg-slate-100"}`}
+      >
         {COMNAME}
       </Link>
     </li>
@@ -22,15 +24,7 @@ const SuggestionList = ({
   return (
     <>
       {isSearchFocus && (
-        <ul
-          className="absolute top-[3.6rem] bg-white w-[48rem] max-h-96 overflow-y-auto shadow-xl"
-          onBlur={(e) => {
-            e.stopPropagation();
-          }}
-          onFocus={(e) => {
-            e.stopPropagation();
-          }}
-        >
+        <ul className="absolute top-[3.6rem] bg-white w-[48rem] max-h-96 overflow-y-auto shadow-xl">
           {suggestionsHTML}
         </ul>
       )}
