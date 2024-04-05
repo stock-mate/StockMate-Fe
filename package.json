@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",
+    "d3-format": "^3.1.0",
+    "d3-time-format": "^4.1.0",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-financial-charts": "^2.0.1",
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {

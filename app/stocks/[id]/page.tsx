@@ -1,6 +1,7 @@
 import Header from "@/app/ui/header";
 import Footer from "@/app/ui/footer";
 import { getStock } from "@/app/lib/stocks";
+import ChartComponent from "@/app/ui/chart";
 
 const page = async ({
   params,
@@ -25,7 +26,9 @@ const page = async ({
             <span className="font-light text-red-500">↑800</span>
           </div>
         </div>
-        <div>{/* chart! */}</div>
+        <div className="border">
+          <ChartComponent />
+        </div>
       </main>
       <Footer />
     </>
