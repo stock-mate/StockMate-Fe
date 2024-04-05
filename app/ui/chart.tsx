@@ -174,7 +174,7 @@ const ChartComponent = () => {
         <SingleValueTooltip
           yAccessor={elder.accessor()}
           yLabel="Elder Ray"
-          yDisplayFormat={(d) =>
+          yDisplayFormat={(d: any) =>
             `${pricesDisplayFormat(d.bullPower)}, ${pricesDisplayFormat(d.bearPower)}`
           }
           origin={[8, 16]}
