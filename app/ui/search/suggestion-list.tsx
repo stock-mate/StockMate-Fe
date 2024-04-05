@@ -10,7 +10,6 @@ const SuggestionList = ({
   suggestions: { TICKER: string; COMNAME: string }[];
 }) => {
   const { isSearchFocus } = useContext(GlobalContext);
-  console.log(isSearchFocus);
 
   const suggestionsHTML = suggestions?.map(({ TICKER, COMNAME }) => (
     <li key={`${TICKER}_${COMNAME}`}>
@@ -23,7 +22,15 @@ const SuggestionList = ({
   return (
     <>
       {isSearchFocus && (
-        <ul className="absolute top-[3.6rem] bg-white w-[48rem] max-h-96 overflow-y-auto shadow-xl">
+        <ul
+          className="absolute top-[3.6rem] bg-white w-[48rem] max-h-96 overflow-y-auto shadow-xl"
+          onBlur={(e) => {
+            e.stopPropagation();
+          }}
+          onFocus={(e) => {
+            e.stopPropagation();
+          }}
+        >
           {suggestionsHTML}
         </ul>
       )}

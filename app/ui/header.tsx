@@ -1,7 +1,6 @@
 import Logo from "@/app/ui/logo";
-import Search from "@/app/ui/search";
 import { getSuggestions } from "../lib/stocks";
-import SuggestionList from "@/app/ui/suggestion-list";
+import SearchWrapper from "@/app/ui/search/search-wrapper";
 
 const Header = async ({ query }: { query: string }) => {
   const suggestions = (await getSuggestions(query)) || [];
@@ -12,8 +11,7 @@ const Header = async ({ query }: { query: string }) => {
         <Logo />
       </div>
       <div className="flex flex-col	basis-3/4 border">
-        <Search />
-        {suggestions.length !== 0 && <SuggestionList suggestions={suggestions} />}
+        <SearchWrapper suggestions={suggestions} />
       </div>
     </header>
   );
