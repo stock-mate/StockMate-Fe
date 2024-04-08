@@ -28,6 +28,7 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
   }, 1000);
 
   const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.key === "ArrowDown") {
       if (focusIndex === suggestions.length - 1) {
         setFocusIndex(0);
@@ -43,6 +44,8 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
     } else if (e.key === "Enter") {
       e.preventDefault();
       replace(`/stocks/${suggestions[focusIndex].TICKER}`);
+    } else if (e.key === "Backspace") {
+      setKeyword((prevKeyword) => prevKeyword.slice(0, -1));
     }
   };
 
