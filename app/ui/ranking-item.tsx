@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const RankingItem = ({ idx }: any) => {
+const RankingItem = ({ idx }: { idx: number }) => {
   return (
     <li>
       <Link href="/stocks/SSNLF" className="flex justify-between h-10 mt-5">

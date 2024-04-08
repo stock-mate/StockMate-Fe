@@ -9,7 +9,7 @@ const SuggestionList = ({
 }: {
   suggestions: { TICKER: string; COMNAME: string }[];
 }) => {
-  const scrollRef = useRef<any>(null);
+  const scrollRef = useRef<HTMLLIElement | null>(null);
   const { isSearchFocus, focusIndex } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const SuggestionList = ({
         href={`/stocks/${TICKER}`}
         className={`block p-2 border hover:bg-slate-100 ${focusIndex === index && "bg-slate-100"}`}
       >
-        {COMNAME} {index}
+        {COMNAME}
       </Link>
     </li>
   ));

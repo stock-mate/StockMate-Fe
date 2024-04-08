@@ -4,8 +4,8 @@ import Footer from "@/app/ui/footer";
 
 export default function Home({ searchParams }: { searchParams?: { query?: string } }) {
   const query = searchParams?.query || "";
-
   const liHTML = new Array(10).fill(0).map((_, idx) => <RankingItem key={idx} idx={idx} />);
+
   return (
     <>
       <Header query={query} />
