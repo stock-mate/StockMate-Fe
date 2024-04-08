@@ -24,7 +24,7 @@ export const GlobalContext = createContext(Context);
 
 export function ContextProvider({ children }: { children: React.ReactNode }) {
   const [isSearchFocus, setIsSearchFocus] = useState(false);
-  const [focusIndex, setFocusIndex] = useState(-1);
+  const [focusIndex, setFocusIndex] = useState(-2);
 
   const contextValue = {
     isSearchFocus,

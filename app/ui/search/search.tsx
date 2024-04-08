@@ -36,13 +36,14 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
         setFocusIndex((prevIndex) => prevIndex + 1);
       }
     } else if (e.key === "ArrowUp") {
-      if (focusIndex < 0) {
+      if (focusIndex === 0) {
         setFocusIndex(suggestions.length - 1);
       } else {
         setFocusIndex((prevIndex) => prevIndex - 1);
       }
     } else if (e.key === "Enter") {
       e.preventDefault();
+      if (focusIndex < 0) return;
       replace(`/stocks/${suggestions[focusIndex].TICKER}`);
     } else if (e.key === "Backspace") {
       setKeyword((prevKeyword) => prevKeyword.slice(0, -1));
@@ -58,7 +59,7 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
         onChange={(e) => {
           handleSearch(e.target.value);
           setKeyword(e.target.value);
-          setFocusIndex(-1);
+          setFocusIndex(-2);
         }}
         onKeyDown={handleKeyboard}
         value={keyword}
