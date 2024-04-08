@@ -54,7 +54,7 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
     <form className="flex flex-row basis-3/4">
       <input
         type="search"
-        placeholder="영문 종목명을 입력하세요"
+        placeholder="🔍 종목명을 입력하세요"
         className="w-full p-2 outline-none"
         onChange={(e) => {
           handleSearch(e.target.value);
@@ -63,10 +63,11 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
         }}
         onKeyDown={handleKeyboard}
         value={keyword}
+        autoFocus
       />
-      <button type="submit">
+      {/* <button type="submit">
         <MagnifyingGlassIcon className="text-slate-500 w-6 h-6 stroke-2 mr-2" />
-      </button>
+      </button> */}
     </form>
   );
 };
