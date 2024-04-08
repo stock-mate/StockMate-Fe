@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import GlobalContext from "@/app/global-context";
 
 const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: string }[] }) => {
@@ -11,6 +11,11 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
   const { replace } = useRouter();
   const searchParam = useSearchParams();
   const pathname = usePathname();
+  const [keyword, setKeyword] = useState(searchParam.get("query")?.toString() || "");
+
+  useEffect(() => {
+    setKeyword(searchParam.get("query")?.toString() || "");
+  }, [searchParam.get("query")?.toString()]);
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParam);
@@ -49,10 +54,11 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
         className="w-full p-2 outline-none"
         onChange={(e) => {
           handleSearch(e.target.value);
+          setKeyword(e.target.value);
           setFocusIndex(-1);
         }}
         onKeyDown={handleKeyboard}
-        defaultValue={searchParam.get("query")?.toString()}
+        value={keyword}
       />
       <button type="submit">
         <MagnifyingGlassIcon className="text-slate-500 w-6 h-6 stroke-2 mr-2" />
