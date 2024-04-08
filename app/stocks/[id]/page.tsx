@@ -13,7 +13,7 @@ const page = async ({
   const { id } = params;
   const { longName } = await getStock(id);
   const { query } = searchParams || "";
-
+  console.log(longName);
   return (
     <>
       <Header query={query} />
