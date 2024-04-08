@@ -130,3 +130,9 @@
       format("truetype");
   font-display: swap;
 }
+
+@layer components {
+  input {
+    -webkit-user-select: inherit;
+  }
+}
