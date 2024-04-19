@@ -23,7 +23,7 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 1000);
+  }, 300);
 
   // const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
   //   console.log(e.key);
