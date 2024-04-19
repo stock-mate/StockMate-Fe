@@ -12,9 +12,10 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
   const pathname = usePathname();
   const [keyword, setKeyword] = useState(searchParam.get("query")?.toString() || "");
 
-  useEffect(() => {
-    setKeyword(searchParam.get("query")?.toString() || "");
-  }, [searchParam.get("query")?.toString()]);
+  // useEffect(() => {
+  //   setKeyword(searchParam.get("query")?.toString() || "");
+  // }, [searchParam.get("query")?.toString()]);
+
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParam);
     if (term) {

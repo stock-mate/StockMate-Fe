@@ -17,12 +17,10 @@ export const getStock = async (ticker: string) => {
   noStore();
   const url = `${process.env.API_URL}/stocks/${ticker}`;
   const data = await fetchData(url);
-  console.log("getStock", data);
   return data;
 };
 
 export const getSuggestions = async (query: string) => {
-  noStore();
   if (!query) return []; // 왜 자꾸 호출되는거지?
   const url = `${process.env.API_URL}/find_ticker/?comname=${query}`;
   const data = await fetchData(url);
