@@ -1,6 +1,6 @@
 import Header from "@/app/ui/header";
 import Footer from "@/app/ui/footer";
-import { getStock } from "@/app/lib/stocks";
+import { getStock, getChartData } from "@/app/lib/stocks";
 import ChartComponent from "@/app/ui/chart";
 
 const page = async ({
@@ -10,10 +10,14 @@ const page = async ({
   params: { id: string };
   searchParams: { query: string };
 }) => {
-  const { id } = params;
-  const { longName } = await getStock(id);
+  const ticker = params.id;
+  const { longName } = await getStock(ticker);
+  const chartData = await getChartData(ticker);
   const { query } = searchParams || "";
   console.log(longName);
+
+  // TODO: chartData 없으면 스켈레톤 표출
+
   return (
     <>
       <Header query={query} />
@@ -26,9 +30,7 @@ const page = async ({
             <span className="font-light text-red-500">↑800</span>
           </div>
         </div>
-        <div className="border">
-          <ChartComponent />
-        </div>
+        <div className="border">{chartData && <ChartComponent chartData={chartData} />}</div>
       </main>
       <Footer />
     </>

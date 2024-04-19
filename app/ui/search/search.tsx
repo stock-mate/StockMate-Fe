@@ -1,6 +1,5 @@
 "use client";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useContext, useState, useEffect } from "react";
@@ -16,7 +15,6 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
   useEffect(() => {
     setKeyword(searchParam.get("query")?.toString() || "");
   }, [searchParam.get("query")?.toString()]);
-
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParam);
     if (term) {
@@ -27,28 +25,32 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
     replace(`${pathname}?${params.toString()}`);
   }, 1000);
 
-  const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.key === "ArrowDown") {
-      if (focusIndex === suggestions.length - 1) {
-        setFocusIndex(0);
-      } else {
-        setFocusIndex((prevIndex) => prevIndex + 1);
-      }
-    } else if (e.key === "ArrowUp") {
-      if (focusIndex === 0) {
-        setFocusIndex(suggestions.length - 1);
-      } else {
-        setFocusIndex((prevIndex) => prevIndex - 1);
-      }
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (focusIndex < 0) return;
-      replace(`/stocks/${suggestions[focusIndex].TICKER}`);
-    } else if (e.key === "Backspace") {
-      setKeyword((prevKeyword) => prevKeyword.slice(0, -1));
-    }
-  };
+  // const handleKeyboard = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   console.log(e.key);
+  //   e.preventDefault();
+  //   if (e.key === "ArrowDown") {
+  //     if (focusIndex === suggestions.length - 1) {
+  //       setFocusIndex(0);
+  //     } else {
+  //       setFocusIndex((prevIndex) => prevIndex + 1);
+  //     }
+  //   } else if (e.key === "ArrowUp") {
+  //     if (focusIndex === 0) {
+  //       setFocusIndex(suggestions.length - 1);
+  //     } else {
+  //       setFocusIndex((prevIndex) => prevIndex - 1);
+  //     }
+  //   } else if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     if (focusIndex < 0) return;
+  //     replace(`/stocks/${suggestions[focusIndex].TICKER}`);
+  //   } else if (e.key === "Backspace") {
+  //     setKeyword((prevKeyword) => prevKeyword.slice(0, -1));
+  //   }
+  //   // } else {
+  //   //   setKeyword((prevKeyword) => prevKeyword + e.key);
+  //   // }
+  // };
 
   return (
     <form className="flex flex-row basis-3/4">
@@ -61,7 +63,7 @@ const Search = ({ suggestions }: { suggestions: { TICKER: string; COMNAME: strin
           setKeyword(e.target.value);
           setFocusIndex(-2);
         }}
-        onKeyDown={handleKeyboard}
+        // onKeyDown={handleKeyboard}
         value={keyword}
         autoFocus
       />
