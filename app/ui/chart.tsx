@@ -30,7 +30,19 @@ import {
 } from "react-financial-charts";
 import { chartData } from "@/app/lib/placeholder-data";
 
-const ChartComponent = () => {
+const ChartComponent = ({
+  chartData,
+}: {
+  chartData: any;
+  // chartData: {
+  //   date: string;
+  //   open: number;
+  //   low: number;
+  //   high: number;
+  //   close: number;
+  //   volume: number;
+  // }[];
+}) => {
   const ScaleProvider = discontinuousTimeScaleProviderBuilder().inputDateAccessor(
     (d) => new Date(d.date)
   );
@@ -38,6 +50,7 @@ const ChartComponent = () => {
   const width = 1000;
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
+  // 이동 평균선을 계사하는 함수
   const ema12 = ema()
     .id(1)
     .options({ windowSize: 12 })
@@ -56,7 +69,7 @@ const ChartComponent = () => {
 
   const elder = elderRay();
 
-  const calculatedData = elder(ema26(ema12(chartData)));
+  const calculatedData = elder(ema26(ema12(chartData))); // 아무데서도 안쓰는데 지우면 맨 밑 데이터가 안나온다
   const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(chartData);
   const pricesDisplayFormat = format(".2f");
   const max = xAccessor(data[data.length - 1]);
@@ -101,7 +114,7 @@ const ChartComponent = () => {
   };
 
   return (
-    // container -> style세팅, 차트에 활용되는 데이터
+    // container -> style 세팅, 차트에 활용되는 데이터
     <ChartCanvas
       height={height}
       ratio={3}
@@ -118,15 +131,22 @@ const ChartComponent = () => {
       <Chart id={2} height={barChartHeight} origin={barChartOrigin} yExtents={barChartExtents}>
         <BarSeries fillStyle={volumeColor} yAccessor={volumeSeries} />
       </Chart>
+      {/* 실제 차트  */}
       <Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
+        {/* x축 */}
         <XAxis showGridLines showTickLabel={false} />
+        {/* y축 */}
         <YAxis showGridLines tickFormat={pricesDisplayFormat} />
+        {/* 차트 */}
         <CandlestickSeries />
+        {/* 빨간 라인선 그래프 */}
         <LineSeries yAccessor={ema26.accessor()} strokeStyle={ema26.stroke()} />
         <CurrentCoordinate yAccessor={ema26.accessor()} fillStyle={ema26.stroke()} />
+        {/* 파란 라인선 그래프 */}
         <LineSeries yAccessor={ema12.accessor()} strokeStyle={ema12.stroke()} />
         <CurrentCoordinate yAccessor={ema12.accessor()} fillStyle={ema12.stroke()} />
         <MouseCoordinateY rectWidth={margin.right} displayFormat={pricesDisplayFormat} />
+        {/* 끝 아이템 레이블 */}
         <EdgeIndicator
           itemType="last"
           rectWidth={margin.right}
@@ -135,6 +155,7 @@ const ChartComponent = () => {
           displayFormat={pricesDisplayFormat}
           yAccessor={yEdgeIndicator}
         />
+        {/* 왼쪽 위 레이블 */}
         <MovingAverageTooltip
           origin={[8, 24]}
           options={[
@@ -152,10 +173,10 @@ const ChartComponent = () => {
             },
           ]}
         />
-
         <ZoomButtons />
         <OHLCTooltip origin={[8, 16]} />
       </Chart>
+      {/* 아래 차트 */}
       <Chart
         id={4}
         height={elderRayHeight}
@@ -163,14 +184,17 @@ const ChartComponent = () => {
         origin={elderRayOrigin}
         padding={{ top: 8, bottom: 8 }}
       >
+        {/* 아래 차트 x축 */}
         <XAxis showGridLines gridLinesStrokeStyle="#e0e3eb" />
+        {/* 아래 차트 y축 */}
         <YAxis ticks={4} tickFormat={pricesDisplayFormat} />
-
+        {/* 호버 시 x축 눈금 */}
         <MouseCoordinateX displayFormat={timeDisplayFormat} />
+        {/* 호버 시 y축 눈금 */}
         <MouseCoordinateY rectWidth={margin.right} displayFormat={pricesDisplayFormat} />
-
+        {/* 아래 실제 차트 */}
         <ElderRaySeries yAccessor={elder.accessor()} />
-
+        {/* 왼쪽 위 차트 레이블 */}
         <SingleValueTooltip
           yAccessor={elder.accessor()}
           yLabel="Elder Ray"
